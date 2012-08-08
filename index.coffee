@@ -1,6 +1,7 @@
 require("coffee-script")
 stitch  = require("stitch")
 express = require("express")
+stylus  = require("stylus")
 argv    = process.argv.slice(2)
 
 _package = stitch.createPackage(
@@ -13,11 +14,13 @@ _package = stitch.createPackage(
     __dirname + '/lib/three.js'
   ]
 )
-app = express.createServer()
+app = express(
+)
 
 app.configure ->
   app.set "views", __dirname + "/views"
   app.use app.router
+  app.use stylus.middleware(__dirname + "/public")
   app.use express.static(__dirname + "/public")
   app.get "/application.js", _package.createServer()
 

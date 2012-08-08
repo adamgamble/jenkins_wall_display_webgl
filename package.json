@@ -24,7 +24,8 @@
         "coffee-script": "*",
         "stitch": "*",
         "express": "*",
-        "eco": "*"
+        "eco": "*",
+        "stylus": "*"
     },
     "devDependencies": {
         "coffee-script": "*"

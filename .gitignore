@@ -1,3 +1,4 @@
 scripts/*.js
 *.sw*
 node_modules
+public/stylesheets/*.css
