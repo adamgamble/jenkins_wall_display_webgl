@@ -5,6 +5,5 @@ module.exports = App =
     # Bootstrap the app
     renderer        = new Renderer
     client          = new JenkinsClient(renderer)
-    renderer.client = client
 
     client.refresh_jenkins_data()

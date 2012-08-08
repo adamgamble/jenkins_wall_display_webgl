@@ -2,9 +2,8 @@ JobRenderer = require('views/job_renderer')
 
 module.exports = class Renderer
   constructor: ->
-    @client = null # This will need to be set after instantiation, until we have an event bus to proxy data between this and the client
 
-  render: () ->
+  render: (data) ->
     # set the scene size
     WIDTH     = 1024
     HEIGHT    = 768
@@ -40,7 +39,7 @@ module.exports = class Renderer
 
     x = -400
     y = 200
-    for job in @client.jenkins_data.jobs
+    for job in data.jobs
       do (job) -> 
         job_renderer = new JobRenderer(job, x, y)
         scene.add job_renderer.render()
