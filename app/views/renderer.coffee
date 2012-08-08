@@ -1,7 +1,8 @@
 JobRenderer = require('views/job_renderer')
 
 module.exports = class Renderer
-  constructor: ->
+  # Initialize the renderer with the dom element it's to render in
+  constructor: (@container) ->
 
   render: (data) ->
     # set the scene size
@@ -13,10 +14,6 @@ module.exports = class Renderer
     ASPECT = WIDTH / HEIGHT
     NEAR = 0.1
     FAR = 10000
-
-    # get the DOM element to attach to
-    # - assume we've got jQuery to hand
-    $container = $("#container")
 
     # create a WebGL renderer, camera
     # and a scene
@@ -35,7 +32,7 @@ module.exports = class Renderer
     renderer.setSize WIDTH, HEIGHT
 
     # attach the render-supplied DOM element
-    $container.append renderer.domElement
+    @container.append renderer.domElement
 
     x = -400
     y = 200
