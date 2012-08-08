@@ -1,4 +1,9 @@
-class Renderer
+JobRenderer = require('models/job_renderer')
+
+module.exports = class Renderer
+  constructor: ->
+    @client = null # This will need to be set after instantiation, until we have an event bus to proxy data between this and the client
+
   render: () ->
     # set the scene size
     WIDTH     = 1024
@@ -23,10 +28,6 @@ class Renderer
     # add the camera to the scene
     scene.add camera
 
-    # create the sphere's material
-    redMaterial = new THREE.MeshLambertMaterial(color: 0xCC0000)
-    greenMaterial = new THREE.MeshLambertMaterial(color: 0x99FF33)
-
     # the camera starts at 0,0,0
     # so pull it back
     camera.position.z = 300
@@ -37,22 +38,12 @@ class Renderer
     # attach the render-supplied DOM element
     $container.append renderer.domElement
 
-    # set up the sphere vars
-    radius = 50
-    segments = 16
-    rings = 16
-
     x = -400
     y = 200
-    for job in Isotope11.WallDisplay.client.jenkins_data.jobs
+    for job in @client.jenkins_data.jobs
       do (job) -> 
-        if job.color == "blue"
-          material_to_use = greenMaterial
-        else
-          material_to_use = redMaterial
-        sphere = new THREE.Mesh(new THREE.SphereGeometry(radius, segments, rings), material_to_use)
-        sphere.position.set(x,y,-600)
-        scene.add sphere
+        job_renderer = new JobRenderer(job, x, y)
+        scene.add job_renderer.render()
         x = x + 100
         if x > 400
           x = -400
@@ -72,12 +63,3 @@ class Renderer
 
     # draw!
     renderer.render scene, camera
-
-namespace = (target, name, block) ->
-  [target, name, block] = [(if typeof exports isnt 'undefined' then exports else window), arguments...] if arguments.length < 3
-  top    = target
-  target = target[item] or= {} for item in name.split '.'
-  block target, top
-
-namespace "Isotope11.WallDisplay", (exports) ->
-  exports.Renderer = Renderer

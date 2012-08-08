@@ -1,0 +1,37 @@
+{
+    "name": "jenkins_wall_display_webgl",
+    "version": "0.1.0",
+    "author": "Adam Gamble <agamble@isotope11.com>",
+    "description": "A WebGL Implementation of the Jenkins Wall Display",
+    "contributors": [
+        {
+            "name": "Adam Gamble",
+            "email": "agamble@isotope11.com"
+        },
+        {
+            "name": "Josh Adams",
+            "email": "josh@isotope11.com"
+        }
+    ],
+    "scripts": {
+      "start": "./node_modules/coffee-script/bin/coffee index.coffee"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/adamgamble/jenkins_wall_display_webgl.git"
+    },
+    "dependencies": {
+        "coffee-script": "*",
+        "stitch": "*",
+        "express": "*",
+        "eco": "*"
+    },
+    "devDependencies": {
+        "coffee-script": "*"
+    },
+    "bundleDependencies": [
+    ],
+    "engine": {
+        "node": ">=0.8.5"
+    }
+}

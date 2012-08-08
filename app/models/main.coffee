@@ -9,9 +9,4 @@ $(document).ready ->
   client        = new Isotope11.WallDisplay.JenkinsClient
   renderer      = new Isotope11.WallDisplay.Renderer
 
-  #Export the instances to the namespace so we can get at them whenever we want
-  namespace "Isotope11.WallDisplay", (exports) ->
-    exports.client    = client
-    exports.renderer  = renderer
-
   client.refresh_jenkins_data()

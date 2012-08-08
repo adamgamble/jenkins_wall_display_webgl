@@ -1,1 +1,3 @@
 scripts/*.js
+*.sw*
+node_modules

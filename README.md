@@ -1,6 +1,8 @@
-#Jenkins Wall Display WEBGL
-install coffeescript
+# Jenkins Wall Display WEBGL
+### Development
+This is set up as an npm package.
 
-    run ./compile.sh
+    npm install
+    npm start
 
-open index.html
+Visit the server it starts up
