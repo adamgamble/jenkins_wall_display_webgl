@@ -16,7 +16,9 @@ module.exports = class Renderer
     # Define the job grid parameters
     @starting_x = -400
     @starting_y = 200
-    @starting_z = 300
+    @starting_z = -600
+    @camera_z   = 300
+
     @max_x = 400
     @next_rendering_spot_x_offset = 100
     @next_rendering_spot_y_offset = 100
@@ -27,10 +29,11 @@ module.exports = class Renderer
   render: (data) ->
     @current_x = @starting_x
     @current_y = @starting_y
+    @current_z = @starting_z
 
     for job in data.jobs
       do (job) => 
-        job_renderer = new JobRenderer(job, @current_x, @current_y)
+        job_renderer = new JobRenderer(job, @current_x, @current_y, @current_z)
         @scene.add job_renderer.render()
         @go_to_next_rendering_spot()
 
@@ -56,7 +59,7 @@ module.exports = class Renderer
     @camera = new THREE.PerspectiveCamera(@view_angle, @aspect, @near, @far)
     # the camera starts at 0,0,0
     # so pull it back
-    @camera.position.z = @starting_z
+    @camera.position.z = @camera_z
     @scene.add @camera
 
   add_lighting: ->
