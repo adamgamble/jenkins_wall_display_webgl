@@ -1,20 +1,23 @@
 module.exports = class JobRenderer
   constructor: (@job, @x, @y) ->
-  render: ->
-    # set up the sphere vars
-    radius = 50
-    segments = 16
-    rings = 16
-
     # create the sphere's material
-    redMaterial = new THREE.MeshLambertMaterial(color: 0xCC0000)
-    greenMaterial = new THREE.MeshLambertMaterial(color: 0x99FF33)
+    @redMaterial = new THREE.MeshLambertMaterial(color: 0xCC0000)
+    @greenMaterial = new THREE.MeshLambertMaterial(color: 0x99FF33)
 
-    if @job.color == "blue"
-      material_to_use = greenMaterial
-    else
-      material_to_use = redMaterial
+  render: ->
+    # set up the cube vars
+    width     = 50
+    height    = 50
+    depth     = 50
+    segments  = 16
 
-    sphere = new THREE.Mesh(new THREE.SphereGeometry(radius, segments, rings), material_to_use)
-    sphere.position.set(@x, @y, -600)
-    sphere
+    cube = new THREE.Mesh(new THREE.CubeGeometry(width, height, depth, segments, segments, segments, @material()), new THREE.MeshFaceMaterial())
+    cube.position.set(@x, @y, -600)
+    cube
+
+  material: ->
+    switch @job.color
+      when "blue"
+        @greenMaterial
+      else
+        @redMaterial
