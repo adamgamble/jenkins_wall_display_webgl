@@ -9,7 +9,9 @@ module.exports = class JobRenderer
 
   render: ->
     # Change the color for the material based on the state
-    @cube.material = @material()
+    mat = @material()
+    mat.opacity = @materialOpacity()
+    @cube.material = mat
     # return the mesh
     @cube
 
@@ -28,9 +30,13 @@ module.exports = class JobRenderer
   # This won't matter until there's another switch on a job property
   # It would be a place that the materials could live and not be re-instantiated per-job/per-render
   material: ->
-    if /anime/.test @job.color
-      @yellowMaterial
-    else if /blue/.test @job.color
+    if /blue/.test @job.color
       @greenMaterial
     else
       @redMaterial
+
+  materialOpacity: ->
+    if /anime/.test @job.color # Prime opportunity for model method #building?
+      1 + Math.sin(new Date().getTime() * .0025)
+    else
+      1
