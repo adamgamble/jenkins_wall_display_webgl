@@ -24,8 +24,9 @@ module.exports = class Renderer
 
     @camera_z     = 500
     # Handle camera rove
-    @min_camera_z = 200
-    @max_camera_z = 700
+    camera_rove_delta = 100
+    @min_camera_z = @camera_z - camera_rove_delta
+    @max_camera_z = @camera_z + camera_rove_delta
     @camera_direction = -1
 
     # Setup threejs bits
