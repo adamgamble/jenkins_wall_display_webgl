@@ -12,7 +12,9 @@ _package = stitch.createPackage(
   dependencies: [
     __dirname + '/lib/jquery.js',
     __dirname + '/lib/three.js',
-    __dirname + '/lib/request_animation_frame_polyfill.js'
+    __dirname + '/lib/request_animation_frame_polyfill.js',
+    __dirname + '/lib/helvetiker_bold.typeface.js',
+    __dirname + '/lib/helvetiker_regular.typeface.js'
   ]
 )
 app = express()
