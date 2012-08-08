@@ -1,8 +1,8 @@
 class Renderer
   render: () ->
     # set the scene size
-    WIDTH = 400
-    HEIGHT = 300
+    WIDTH     = 1024
+    HEIGHT    = 768
 
     # set some camera attributes
     VIEW_ANGLE = 45
@@ -24,7 +24,7 @@ class Renderer
     scene.add camera
 
     # create the sphere's material
-    sphereMaterial = new THREE.MeshLambertMaterial(color: 0xCC0000)
+    redMaterial = new THREE.MeshLambertMaterial(color: 0xCC0000)
 
     # the camera starts at 0,0,0
     # so pull it back
@@ -41,13 +41,18 @@ class Renderer
     segments = 16
     rings = 16
 
-    # create a new mesh with
-    # sphere geometry - we will cover
-    # the sphereMaterial next!
-    sphere = new THREE.Mesh(new THREE.SphereGeometry(radius, segments, rings), sphereMaterial)
+    x = -400
+    y = 200
+    for job in Isotope11.WallDisplay.client.jenkins_data.jobs
+      do (job) ->
+        sphere = new THREE.Mesh(new THREE.SphereGeometry(radius, segments, rings), redMaterial)
+        sphere.position.set(x,y,-600)
+        scene.add sphere
+        x = x + 100
+        if x > 400
+          x = -400
+          y = y - 100
 
-    # add the sphere to the scene
-    scene.add sphere
 
     # create a point light
     pointLight = new THREE.PointLight(0xFFFFFF)
