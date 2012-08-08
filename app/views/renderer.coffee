@@ -1,4 +1,4 @@
-JobRenderer = require('models/job_renderer')
+JobRenderer = require('views/job_renderer')
 
 module.exports = class Renderer
   constructor: ->

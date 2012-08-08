@@ -1,7 +1,7 @@
 module.exports = App =
   init: ->
-    JenkinsClient = require('models/jenkins_client')
-    Renderer = require('models/renderer')
+    JenkinsClient = require('lib/jenkins_client')
+    Renderer = require('views/renderer')
     # Bootstrap the app
     renderer        = new Renderer
     client          = new JenkinsClient(renderer)
