@@ -11,11 +11,11 @@ _package = stitch.createPackage(
   # Specify your base libraries
   dependencies: [
     __dirname + '/lib/jquery.js',
-    __dirname + '/lib/three.js'
+    __dirname + '/lib/three.js',
+    __dirname + '/lib/request_animation_frame_polyfill.js'
   ]
 )
-app = express(
-)
+app = express()
 
 app.configure ->
   app.set "views", __dirname + "/views"

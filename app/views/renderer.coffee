@@ -26,16 +26,30 @@ module.exports = class Renderer
     # Setup threejs bits
     @set_up_renderer_and_scene()
 
-  render: (data) ->
+    @job_renderers = {}
+
+  add_data: (data) ->
     @current_x = @starting_x
     @current_y = @starting_y
     @current_z = @starting_z
 
+    # Add a cube per job
     for job in data.jobs
       do (job) => 
         job_renderer = new JobRenderer(job, @current_x, @current_y, @current_z)
+        @job_renderers[job.name] = job_renderer
         @scene.add job_renderer.render()
         @go_to_next_rendering_spot()
+
+    @render(data)
+
+  render: (data) ->
+    # re-render all the job renderers, so they're ready when the gl_renderer renders
+    for job in data.jobs
+      do (job) => 
+        renderer = @job_renderers[job.name]
+        renderer.job = job
+        renderer.render()
 
     # draw!
     @gl_renderer.render @scene, @camera
